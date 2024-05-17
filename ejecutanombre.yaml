@@ -4,7 +4,7 @@
 read -p "Ingrese el nombre del archivo de acción a ejecutar: " action_name
 
 # Traducir el nombre de la acción al nombre del archivo YAML
-workflow_file=".github/workflows/${action_name}.yaml"
+workflow_file=".github/workflows/${action_name}.yml"
 
 # Verificar si el archivo YAML existe
 if [ ! -f "$workflow_file" ]; then
