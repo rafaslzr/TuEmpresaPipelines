@@ -1,16 +1,47 @@
+name: Run Hello World
+
+on:
+  push:
+    paths:
+      - '**.sh'  # Trigger the action when a .sh file is pushed
+  workflow_dispatch:  # Allows you to manually trigger the workflow
+
+jobs:
+  run-hello-world:
+    runs-on: ubuntu-latest
+
+    steps:
+    # este paso es solo una imposicion de github y pertenece al Marketplace
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    # Use a custom action from another repository
+    - name: Use Custom Action
+      uses: rafaslzr/TuEmpresaPipelines/blob/main/ejecutanombre.yaml@ref
+      # Example of passing variables if needed
+      #with:
+        #example_input: 'value'
+
+    # Run your bash script
+    - name: Execute Bash Script
+      run: |
+        chmod +x your-script.sh
+        ../helloworld.sh
+      shell: bash
+      
 #!/bin/bash
 
 # Leer la entrada del usuario
-read -p "Ingrese el nombre del archivo de acción a ejecutar: " action_name
+#read -p "Ingrese el nombre del archivo de acción a ejecutar: " action_name
 
 # Traducir el nombre de la acción al nombre del archivo YAML
-workflow_file=".github/workflows/${action_name}.yml"
+#workflow_file=".github/workflows/${action_name}.yml"
 
 # Verificar si el archivo YAML existe
-if [ ! -f "$workflow_file" ]; then
-  echo "El archivo de acción '$action_name' no existe."
-  exit 1
-fi
+#if [ ! -f "$workflow_file" ]; then
+#  echo "El archivo de acción '$action_name' no existe."
+#  exit 1
+#fi
 
 # Ejecutar el workflow utilizando la CLI de GitHub Actions
-gh workflow run "$workflow_file"
+#gh workflow run "$workflow_file"
